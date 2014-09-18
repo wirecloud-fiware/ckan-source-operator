@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="amagan" name="ckan-source" version="0.1">
+  <details>
+    <title>CKAN Source</title>
+    <authors>Aitor Magán García &lt;amagan@conwet.com&gt;</authors>
+    <email>amagan@conwet.com</email>
+    <image>images/ckan.png</image>
+    <description>An operator to retrieve data from a CKAN dataset</description>
+    <longdescription>DESCRIPTION.md</longdescription>
+    <homepage>https://github.com/wirecloud/ckan-source-operator</homepage>
+    <license>AGPLv3+ w/linking exception</license>
+    <licenseurl>http://www.gnu.org/licenses/agpl-3.0.html</licenseurl>
+    <doc>doc/index.html</doc>
+    <changelog>doc/changelog.md</changelog>
+  </details>
+  <preferences>
+      <preference name="ckan_server" type="text" description="CKAN Server URL" label="CKAN Server URL" default="https://data.lab.fi-ware.org"/>
+      <preference name="resource" type="text" description="Every dataset has some resources" label="Resource ID"/>
+      <preference name="limit_rows" type="text" description="Maximum number of rows to return" label="Number of rows to retrieve (resources)" default="100"/>
+  </preferences>
+  <wiring>
+      <outputendpoint name="resource" type="text" label="Resource" description="The resource (a JSON including the structure and the data)" friendcode="dataset"/>
+  </wiring>
+  <scripts>
+    <script src="js/main.js"/>
+  </scripts>
+</operator>
