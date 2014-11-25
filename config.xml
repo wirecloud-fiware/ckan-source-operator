@@ -10,7 +10,7 @@
     <homepage>https://github.com/wirecloud-fiware/ckan-source-operator</homepage>
     <license>Apache License 2.0</license>
     <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
-    <doc>doc/index.html</doc>
+    <doc>doc/index.md</doc>
     <changelog>doc/changelog.md</changelog>
   </details>
   <preferences>
