@@ -7,7 +7,7 @@
     <image>images/ckan.png</image>
     <description>An operator to retrieve data from a CKAN dataset</description>
     <longdescription>DESCRIPTION.md</longdescription>
-    <homepage>https://github.com/wirecloud/ckan-source-operator</homepage>
+    <homepage>https://github.com/wirecloud-fiware/ckan-source-operator</homepage>
     <license>Apache License 2.0</license>
     <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
     <doc>doc/index.html</doc>
