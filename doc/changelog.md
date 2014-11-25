@@ -5,6 +5,7 @@
 * Allow to provide CKAN tokens for authentication. This token is provided
   through a new preference and if you use it will disable the athentication
   using the IdM token of the user.
+* Provide resource id through wiring
 
 0.1
 ===

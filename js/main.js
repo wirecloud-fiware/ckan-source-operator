@@ -32,7 +32,7 @@
     'numeric': 'number',
     'int4': 'number',
     'timestamp': 'date'
-  }
+  };
 
 
   ////////////
@@ -66,7 +66,7 @@
     var msg = e ? e : 'An error arised processing your request';
     var type = type ? type : MashupPlatform.log.ERROR;
     MashupPlatform.operator.log(msg, type);
-  }
+  };
 
 
   ///////////////////////
@@ -80,7 +80,7 @@
 
     // Load the new resource
     get_resource();
-  }
+  };
 
   MashupPlatform.prefs.registerCallback(prefHandler);
 
@@ -93,12 +93,13 @@
 
     var resource = JSON.parse(response.responseText);
 
-    if (resource['success']) {
+    if (resource.success) {
 
       var finalData = {
-        structure: resource['result']['fields'],
-        data: resource['result']['records']
-      }
+          resource_id: resource.result.resource_id,
+          structure: resource.result.fields,
+          data: resource.result.records
+      };
 
       //Type transformation
       for (var i = 0; i < finalData.structure.length; i++) {
