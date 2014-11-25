@@ -39,18 +39,28 @@
   //AUXILIAR//
   ////////////
 
-  var make_request = function(url, method, onSuccess, onFailure) {
+  var make_request = function make_request(url, method, onSuccess, onFailure) {
+    var headers,
+        auth_token = MashupPlatform.prefs.get('auth_token');
+
+    if (auth_token === '') {
+      headers = {
+        'X-FI-WARE-OAuth-Token': 'true',
+        'X-FI-WARE-OAuth-Header-Name': 'X-Auth-Token'
+      };
+    } else {
+      headers = {
+        'Authentication': auth_token
+      };
+    }
+
     MashupPlatform.http.makeRequest(url, {
       method: method,
       onSuccess: onSuccess,
       onFailure: onFailure,
-      
-      requestHeaders: {
-        'X-FI-WARE-OAuth-Token': 'true',
-        'X-FI-WARE-OAuth-Header-Name': 'X-Auth-Token'
-      }
+      requestHeaders: headers
     });
-  }
+  };
 
   var logError = function(e, type) {
     var msg = e ? e : 'An error arised processing your request';
