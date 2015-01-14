@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 CoNWeT Lab., Universidad Politécnica de Madrid
+ * Copyright (c) 2014-2015 CoNWeT Lab., Universidad Politécnica de Madrid
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,7 @@
 
   'use strict';
 
-  var preference_ckan_server = 'ckan_server';
-  var preference_resource = 'resource';
-  var preference_limit_rows = 'limit_rows';
-  var ckan_server = MashupPlatform.prefs.get(preference_ckan_server);
-  var resource = MashupPlatform.prefs.get(preference_resource);
-  var limit_rows = MashupPlatform.prefs.get(preference_limit_rows);
+  var MP = MashupPlatform;
 
   //CKAN types must be transformed in JS types
   //to be used across the different widgets
@@ -39,9 +34,9 @@
   //AUXILIAR//
   ////////////
 
-  var make_request = function make_request(url, method, onSuccess, onFailure) {
+  var make_request = function make_request(method, url, onSuccess, onFailure) {
     var headers,
-        auth_token = MashupPlatform.prefs.get('auth_token');
+        auth_token = MP.prefs.get('auth_token');
 
     if (auth_token === '') {
       headers = {
@@ -69,20 +64,7 @@
   };
 
 
-  ///////////////////////
-  //GET THE PREFERENCES//
-  ///////////////////////
-
-  var prefHandler = function(preferences) {
-    ckan_server = preference_ckan_server in preferences ? preferences[preference_ckan_server] : ckan_server;
-    resource = preference_resource in preferences ? preferences[preference_resource] : resource;
-    limit_rows = preference_limit_rows in preferences ? preferences[preference_limit_rows] : limit_rows;
-
-    // Load the new resource
-    get_resource();
-  };
-
-  MashupPlatform.prefs.registerCallback(prefHandler);
+  MashupPlatform.prefs.registerCallback(get_resource);
 
 
   ///////////////////////////////////////////////
@@ -136,12 +118,12 @@
   ////////////////////
 
   var get_resource = function() {
-    make_request(ckan_server + '/api/action/datastore_search?limit=' + limit_rows + 
-        '&resource_id=' + resource, 'GET', pushResourceData, failureCb);
-  }
+    make_request('GET', MP.prefs.get('ckan_server') + '/api/action/datastore_search?limit_rows=' + MP.prefs.get('limit_rows') +
+        '&resource_id=' + MP.prefs.get('resource'), pushResourceData, failureCb);
+  };
 
 
-  //Start the execution when the DOM is enterely loaded
-  document.addEventListener('DOMContentLoaded', get_resource.bind(this), true);
+  // Start the execution
+  get_resource();
 
 })();
