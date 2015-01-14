@@ -59,7 +59,7 @@
 
   var logError = function(e, type) {
     var msg = e ? e : 'An error arised processing your request';
-    var type = type ? type : MashupPlatform.log.ERROR;
+    type = type ? type : MashupPlatform.log.ERROR;
     MashupPlatform.operator.log(msg, type);
   };
 
@@ -94,23 +94,23 @@
       MashupPlatform.wiring.pushEvent('resource', JSON.stringify(finalData));
 
       //Log warn message if limit_rows < resource elements
-      var resource_total = resource['result']['total'];
-      if (resource_total > limit_rows) {
-        msg = 'The number of records of the resource are higher than the max number of ' +
+      var resource_total = resource.result.total;
+      if (resource_total > MP.prefs.get('limit_rows')) {
+        var msg = 'The number of records of the resource are higher than the max number of ' +
             'elements to retrieve. If you want to retrieve all the records, increase the ' +
-            'max number of elements to retrieve by editing the operator settings'.
+            'max number of elements to retrieve by editing the operator settings';
 
-        logError(msg, MashupPlatform.log.WARN)
+        logError(msg, MashupPlatform.log.WARN);
       }
 
     } else {
       logError();
     }
-  }
+  };
 
   var failureCb = function(e) {
     logError(e.status + ' - ' + e.statusText, MashupPlatform.log.ERROR);
-  }
+  };
 
 
   ////////////////////
