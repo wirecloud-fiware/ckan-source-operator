@@ -36,16 +36,16 @@
 
     var make_request = function make_request(method, url, onSuccess, onFailure) {
         var headers,
-            auth_token = MP.prefs.get('auth_token');
+            auth_token = MP.prefs.get('auth_token').trim();
 
-        if (auth_token === '') {
+        if (auth_token !== '') {
+            headers = {
+                'Authentication': auth_token
+            };
+        } else if (MashupPlatform.context.get('fiware_token_available')) {
             headers = {
                 'X-FI-WARE-OAuth-Token': 'true',
                 'X-FI-WARE-OAuth-Header-Name': 'X-Auth-Token'
-            };
-        } else {
-            headers = {
-                'Authentication': auth_token
             };
         }
 
