@@ -64,9 +64,6 @@
     };
 
 
-    MashupPlatform.prefs.registerCallback(get_resource);
-
-
     ///////////////////////////////////////////////
     //FUNCTIONS CALLED WHEN THE HTTP REQUEST ENDS//
     ///////////////////////////////////////////////
@@ -122,6 +119,7 @@
                 '&resource_id=' + MP.prefs.get('resource'), pushResourceData, failureCb);
     };
 
+    MashupPlatform.prefs.registerCallback(get_resource);
 
     // Start the execution
     get_resource();

@@ -1,3 +1,8 @@
+0.4.1
+=====
+
+* Fix bug making this operator unusable on WireCloud 0.7.0r5+
+
 0.4
 ===
 
