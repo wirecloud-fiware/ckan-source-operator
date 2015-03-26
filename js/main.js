@@ -40,7 +40,7 @@
 
         if (auth_token !== '') {
             headers = {
-                'Authentication': auth_token
+                'Authorization': auth_token
             };
         } else if (MashupPlatform.context.get('fiware_token_available')) {
             headers = {
