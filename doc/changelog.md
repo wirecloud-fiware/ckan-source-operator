@@ -1,3 +1,8 @@
+0.4.2
+=====
+
+* Fix bug using CKAN API keys
+
 0.4.1
 =====
 
