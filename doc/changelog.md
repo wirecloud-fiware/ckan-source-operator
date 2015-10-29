@@ -1,14 +1,19 @@
-0.4.2
+v0.4.3
+=====
+
+* Support for querying the CKAN server without specifying the limit parameter
+
+v0.4.2
 =====
 
 * Fix bug using CKAN API keys
 
-0.4.1
+v0.4.1
 =====
 
 * Fix bug making this operator unusable on WireCloud 0.7.0r5+
 
-0.4
+v0.4
 ===
 
 * Initial documentation
@@ -19,7 +24,7 @@
 * Update FIWARE Lab URLs using the new schema (fiware.org instead of
   fi-ware.org)
 
-0.1
+v0.1
 ===
 
 * First version

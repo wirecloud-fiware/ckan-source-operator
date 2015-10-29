@@ -34,7 +34,7 @@
     //AUXILIAR//
     ////////////
 
-    var make_request = function make_request(method, url, onSuccess, onFailure) {
+    var make_request = function make_request(method, url, parameters, onSuccess, onFailure) {
         var headers,
             auth_token = MP.prefs.get('auth_token').trim();
 
@@ -51,6 +51,7 @@
 
         MashupPlatform.http.makeRequest(url, {
             method: method,
+            parameters: parameters,
             onSuccess: onSuccess,
             onFailure: onFailure,
             requestHeaders: headers
@@ -70,6 +71,10 @@
 
     var pushResourceData = function pushResourceData(response) {
 
+        var limit = parseInt(MP.prefs.get('limit_rows'), 10);
+        if (isNaN(limit) || limit < 0) {
+            limit = 0;
+        }
         var resource = JSON.parse(response.responseText);
 
         if (resource.success) {
@@ -80,19 +85,19 @@
                 data: resource.result.records
             };
 
-            //Type transformation
+            // Type transformation
             for (var i = 0; i < finalData.structure.length; i++) {
                 if (finalData.structure[i].type in TYPE_MAPPING) {
                     finalData.structure[i].type = TYPE_MAPPING[finalData.structure[i].type];
                 }
             }
 
-            //Push the data through the wiring
+            // Push the data through the wiring
             MashupPlatform.wiring.pushEvent('resource', JSON.stringify(finalData));
 
-            //Log warn message if limit_rows < resource elements
+            // Log warn message if limit_rows < resource elements
             var resource_total = resource.result.total;
-            if (resource_total > MP.prefs.get('limit_rows')) {
+            if (limit != 0 && resource_total > limit) {
                 var msg = 'The number of records of the resource are higher than the max number of ' +
                     'elements to retrieve. If you want to retrieve all the records, increase the ' +
                     'max number of elements to retrieve by editing the operator settings';
@@ -115,8 +120,15 @@
     ////////////////////
 
     var get_resource = function get_resource() {
-        make_request('GET', MP.prefs.get('ckan_server') + '/api/action/datastore_search?limit_rows=' + MP.prefs.get('limit_rows') +
-                '&resource_id=' + MP.prefs.get('resource'), pushResourceData, failureCb);
+        var parameters = {
+            resource_id: MP.prefs.get('resource')
+        };
+
+        var limit = parseInt(MP.prefs.get('limit_rows'), 10);
+        if (!isNaN(limit) && limit > 0) {
+            parameters.limit_rows = limit;
+        }
+        make_request('GET', MP.prefs.get('ckan_server') + '/api/action/datastore_search', parameters, pushResourceData, failureCb);
     };
 
     MashupPlatform.prefs.registerCallback(get_resource);
