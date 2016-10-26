@@ -126,7 +126,7 @@
 
         var limit = parseInt(MP.prefs.get('limit_rows'), 10);
         if (!isNaN(limit) && limit > 0) {
-            parameters.limit_rows = limit;
+            parameters.limit = limit;
         }
         make_request('GET', MP.prefs.get('ckan_server') + '/api/action/datastore_search', parameters, pushResourceData, failureCb);
     };
