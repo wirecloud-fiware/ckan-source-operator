@@ -11,7 +11,7 @@ Preferences that you should consider:
 * **CKAN Server URL**: The link to the CKAN instance where the resource is stored (https://data.lab.fiware.org by default).
 * **CKAN Authorization Token**: CKAN Authorization Token. If empty, this operator will use the IdM credentials of the current user (only available for users logged through the IdM server, so will not work for anoymous users/public workspaces).
 * **Resource ID**: The resource identifier.
-* **Number of rows to retrieve (resources)**: The number of records to retrieve. By default, 100 records are retrieved. This cannot be enough for large resource. If you want to retrieve more that 100 records, you must edit this setting.
+* **Row limit**: Maximum number of rows/results to retrieve. 0 or empty to use the default configuration from the CKAN server.
 
 Obtaining a resource ID
 -----------------------
@@ -26,7 +26,7 @@ Obtaining a resource ID
 
     ![id field screenshot](images/resourceid.png)
 
-**Note:** Currently, only CSV resources can be used through the "Data API".
+> **Note:** Currently, only CSV resources can be used through the "Data API".
 
 References
 ----------
