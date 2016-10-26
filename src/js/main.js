@@ -97,7 +97,7 @@
 
             // Log warn message if limit_rows < resource elements
             var resource_total = resource.result.total;
-            if (limit != 0 && resource_total > limit) {
+            if (limit !== 0 && resource_total > limit) {
                 var msg = 'The number of records of the resource are higher than the max number of ' +
                     'elements to retrieve. If you want to retrieve all the records, increase the ' +
                     'max number of elements to retrieve by editing the operator settings';
