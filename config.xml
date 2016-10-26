@@ -3,7 +3,7 @@
   <details>
     <title>CKAN Source</title>
     <authors>Aitor Magán García &lt;amagan@conwet.com&gt;</authors>
-    <email>amagan@conwet.com</email>
+    <email>wirecloud@conwet.com</email>
     <image>images/ckan.png</image>
     <description>An operator to retrieve data from a CKAN dataset</description>
     <longdescription>DESCRIPTION.md</longdescription>
