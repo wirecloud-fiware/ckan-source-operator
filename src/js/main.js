@@ -25,7 +25,10 @@
     var TYPE_MAPPING = {
         'text': 'string',
         'numeric': 'number',
+        'int': 'number',
         'int4': 'number',
+        'float': 'number',
+        'float8': 'number',
         'timestamp': 'date'
     };
 
