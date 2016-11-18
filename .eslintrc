@@ -1,0 +1,11 @@
+{
+  "extend": ".eslintrc-rules",
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "MashupPlatform": false,
+    "Promise": false,
+    "WeakMap": false
+  }
+}
