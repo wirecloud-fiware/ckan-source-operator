@@ -47,5 +47,5 @@ available on Read the Docs.
 
 ## Copyright and License
 
-Copyright (c) {%= grunt.template.today('yyyy') %} {%= vendor_title %}
-Licensed under the {%= licenses.join(', ') %} license{%= licenses.length === 1 ? '' : 's' %}.
+Copyright 2014-2016 CoNWeT Lab., Universidad Politecnica de Madrid
+Licensed under the Apache-2.0 license.
