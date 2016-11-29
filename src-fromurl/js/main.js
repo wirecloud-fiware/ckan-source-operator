@@ -43,8 +43,9 @@
 
     var init = function init() {
         var mashupUrl = window.frameElement.parentNode.ownerDocument.location;
+        var ckanserver = getURLParameter('ckanserver', mashupUrl);
         var resourceid = getURLParameter('resourceid', mashupUrl);
-        get_resource(resourceid);
+        get_resource(ckanserver, resourceid);
     };
 
     init();

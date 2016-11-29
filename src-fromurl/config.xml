@@ -14,7 +14,6 @@
     <changelog>doc/changelog.md</changelog>
   </details>
   <preferences>
-      <preference name="ckan_server" type="text" description="CKAN Server URL" label="CKAN Server URL" default="https://data.lab.fiware.org"/>
       <preference name="auth_token" type="text" label="CKAN Authorization Token" description="CKAN Authorization Token. If empty, this operator will use the IdM credentials of the current user (only available for users logged through the IdM server, so will not work for anoymous users/public workspaces)"/>
       <preference name="limit_rows" type="text" description="Maximum number of rows/results to retrieve. 0 or empty to use the default configuration from the CKAN server" label="Row limit" default="100"/>
   </preferences>

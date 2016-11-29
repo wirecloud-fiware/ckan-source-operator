@@ -20,9 +20,11 @@
 
     var MP = MashupPlatform;
 
-    MashupPlatform.prefs.registerCallback(get_resource);
+    MashupPlatform.prefs.registerCallback(function () {
+    	get_resource(MP.prefs.get('ckan_server'), MP.prefs.get('resource'));
+    });
 
     // Start the execution
-    get_resource(MP.prefs.get('resource'));
+    get_resource(MP.prefs.get('ckan_server'), MP.prefs.get('resource'));
 
 })();

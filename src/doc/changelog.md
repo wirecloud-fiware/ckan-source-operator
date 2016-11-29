@@ -2,6 +2,7 @@
 
 - Added some missing type mappings (`int`, `float` and `float8`)
 - Use the same source for building the `ckan-source-from-url` operator.
+- Data sent by this operators now has metadata with server URL and resource ID.
 
 ## v0.4.4 (2016-10-26)
 

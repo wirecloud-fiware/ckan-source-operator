@@ -72,7 +72,7 @@
     //FUNCTIONS CALLED WHEN THE HTTP REQUEST ENDS//
     ///////////////////////////////////////////////
 
-    var pushResourceData = function pushResourceData(response) {
+    var pushResourceData = function pushResourceData(server, response) {
 
         var limit = parseInt(MP.prefs.get('limit_rows'), 10);
         if (isNaN(limit) || limit < 0) {
@@ -94,6 +94,11 @@
                     finalData.structure[i].type = TYPE_MAPPING[finalData.structure[i].type];
                 }
             }
+
+            finalData.metadata = {
+                id: resource.result.resource_id,
+                ckan_server: server,
+            };
 
             // Push the data through the wiring
             MashupPlatform.wiring.pushEvent('resource', JSON.stringify(finalData));
@@ -122,7 +127,7 @@
     //GET THE RESOURCE//
     ////////////////////
 
-    window.get_resource = function get_resource(resource) {
+    window.get_resource = function get_resource(ckanServer, resource) {
         var parameters = {
             resource_id: resource 
         };
@@ -131,7 +136,10 @@
         if (!isNaN(limit) && limit > 0) {
             parameters.limit = limit;
         }
-        make_request('GET', MP.prefs.get('ckan_server') + '/api/action/datastore_search', parameters, pushResourceData, failureCb);
+
+        make_request('GET', ckanServer + '/api/action/datastore_search', parameters, function (response) {
+            pushResourceData(ckanServer, response);
+         }, failureCb);
     };
 
 })();
