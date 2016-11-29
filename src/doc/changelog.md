@@ -1,3 +1,8 @@
+## v0.4.5 (2016-11-30)
+
+- Added some missing type mappings (`int`, `float` and `float8`)
+- Use the same source for building the `ckan-source-from-url` operator.
+
 ## v0.4.4 (2016-10-26)
 
 - Fix problem requesting data. The correct name for the `limit_rows` parameter
