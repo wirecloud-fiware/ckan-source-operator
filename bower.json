@@ -1,5 +1,5 @@
 {
-  "name": "ckan-graph-creator",
+  "name": "ckan-source",
   "dependencies": {
     "jquery": "~2.1.4"
   },
