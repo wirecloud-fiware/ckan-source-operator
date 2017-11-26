@@ -20,7 +20,8 @@
       <preference name="limit_rows" type="text" description="Maximum number of rows/results to retrieve. 0 or empty to use the default configuration from the CKAN server" label="Row limit" default="100"/>
   </preferences>
   <wiring>
-      <outputendpoint name="resource" type="text" label="Resource" description="The resource (a JSON including the structure and the data)" friendcode="dataset"/>
+      <outputendpoint name="resource" type="text" label="Resource" description="The resource (a JSON including the structure and the data)" friendcode="dataset ckan-resource-data" />
+      <outputendpoint name="plain" type="text" label="Plain" description="Resource data as a list (this endpoint does not provide resource structure details)" friendcode="data-list" />
   </wiring>
   <scripts>
     <script src="js/shared.js"/>

@@ -82,26 +82,32 @@
 
         if (resource.success) {
 
-            var finalData = {
-                resource_id: resource.result.resource_id,
-                structure: resource.result.fields,
-                data: resource.result.records
-            };
-
-            // Type transformation
-            for (var i = 0; i < finalData.structure.length; i++) {
-                if (finalData.structure[i].type in TYPE_MAPPING) {
-                    finalData.structure[i].type = TYPE_MAPPING[finalData.structure[i].type];
-                }
+            if (MashupPlatform.operator.outputs.plain.connected) {
+                MashupPlatform.wiring.pushEvent("plain", resource.result.records);
             }
 
-            finalData.metadata = {
-                id: resource.result.resource_id,
-                ckan_server: server,
-            };
+            if (MashupPlatform.operator.outputs.resource.connected) {
+                var finalData = {
+                    resource_id: resource.result.resource_id,
+                    structure: resource.result.fields,
+                    data: resource.result.records
+                };
 
-            // Push the data through the wiring
-            MashupPlatform.wiring.pushEvent('resource', JSON.stringify(finalData));
+                // Type transformation
+                for (var i = 0; i < finalData.structure.length; i++) {
+                    if (finalData.structure[i].type in TYPE_MAPPING) {
+                        finalData.structure[i].type = TYPE_MAPPING[finalData.structure[i].type];
+                    }
+                }
+
+                finalData.metadata = {
+                    id: resource.result.resource_id,
+                    ckan_server: server,
+                };
+
+                // Push the data through the wiring
+                MashupPlatform.wiring.pushEvent('resource', JSON.stringify(finalData));
+            }
 
             // Log warn message if limit_rows < resource elements
             var resource_total = resource.result.total;
@@ -137,7 +143,7 @@
             parameters.limit = limit;
         }
 
-        make_request('GET', ckanServer + '/api/action/datastore_search', parameters, function (response) {
+        make_request('GET', new URL('api/action/datastore_search', ckanServer), parameters, function (response) {
             pushResourceData(ckanServer, response);
          }, failureCb);
     };
